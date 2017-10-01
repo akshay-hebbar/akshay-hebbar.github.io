@@ -1,21 +1,59 @@
 <html>
 <script type="text/javascript">
-	function convert(hexCode) {
-
+	function convert() {
+		var map = {
+			'0' : 0,
+			'1' : 1,
+			'2' : 2,
+			'3' : 3,
+			'4' : 4,
+			'5' : 5,
+			'6' : 6,
+			'7' : 7,
+			'8' : 8,
+			'9' : 9,
+			'A' : 10,
+			'B' : 11,
+			'C' : 12,
+			'D' : 13,
+			'E' : 14,
+			'F' : 15
+		};
+		var hexCode = document.getElementById('hexCode').value
+		var bytes = 0;
+		var pow = 0;
+        var s = "";
+		for (var i = hexCode.length - 1; i >= 0; --i) {
+        	if (hexCode[i] == ' ') continue;
+			bytes += Math.pow(16, pow) * map[hexCode[i].toUpperCase()];
+        	s += bytes + "-";
+            ++pow;
+		}
+		document.getElementById('B').innerHTML = bytes + " Bytes"; bytes /= 1024;
+		document.getElementById('KB').innerHTML = bytes + " KB"; bytes /= 1024;
+		document.getElementById('MB').innerHTML = bytes + " MB"; bytes /= 1024;
+		document.getElementById('GB').innerHTML = bytes + " GB";
+        
 	}
+    
+    function putSpace() {
+    	var val = document.getElementById('hexCode').value;
+        if (val.length % 3 == 2) val += " ";
+    	document.getElementById('hexCode').value = val;
+    }
 </script>
 
 <head>
 	<title>Hex to Byte Converter</title>
 </head>
 <body>
-	<p>Hex Code</p>
-	<input type="text" name="hexCode">
-	<br>
-	<input type="button" name="button" onclick="convert()">
-	<div id='GB'></div>
-	<div id='MB'></div>
-	<div id='KB'></div>
+	<p>Enter Hex Code</p>
+	<input type="text" id="hexCode" onkeypress="putSpace()">
+	<input type="button" value="Convert" onclick="convert()">
+	<br> <br>
 	<div id='B'></div>
+	<div id='KB'></div>
+	<div id='MB'></div>
+	<div id='GB'></div>
 </body>
 </html>
