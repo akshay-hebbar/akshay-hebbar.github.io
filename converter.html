@@ -22,25 +22,24 @@
 		var hexCode = document.getElementById('hexCode').value
 		var bytes = 0;
 		var pow = 0;
-        var s = "";
+		var s = "";
 		for (var i = hexCode.length - 1; i >= 0; --i) {
-        	if (hexCode[i] == ' ') continue;
+			if (hexCode[i] == ' ') continue;
 			bytes += Math.pow(16, pow) * map[hexCode[i].toUpperCase()];
-        	s += bytes + "-";
-            ++pow;
+			s += bytes + "-";
+			++pow;
 		}
 		document.getElementById('B').innerHTML = bytes + " Bytes"; bytes /= 1024;
 		document.getElementById('KB').innerHTML = bytes + " KB"; bytes /= 1024;
 		document.getElementById('MB').innerHTML = bytes + " MB"; bytes /= 1024;
 		document.getElementById('GB').innerHTML = bytes + " GB";
-        
 	}
-    
-    function putSpace() {
-    	var val = document.getElementById('hexCode').value;
-        if (val.length % 3 == 2) val += " ";
-    	document.getElementById('hexCode').value = val;
-    }
+
+	function putSpace() {
+		var val = document.getElementById('hexCode').value;
+		if (val.length % 3 == 2) val += " ";
+		document.getElementById('hexCode').value = val;
+	}
 </script>
 
 <head>
